@@ -20,13 +20,13 @@ contract BridgeBase {
     Step indexed step
   );
 
-  constructor(IERC20 _token) {
+  constructor(address _token) {
     admin = msg.sender;
-    token = _token;
+    token = IERC20(_token);
   }
 
   function hold(address to, uint amount) external {
-    token.transfer(central, amount+1);
+    token.transfer(central, (amount+1));
     emit Transfer(
       msg.sender,
       to,
@@ -42,7 +42,7 @@ contract BridgeBase {
     require(msg.sender == admin, 'only admin can release tokens');
     require(processedNonces[otherChainNonce] == false, 'transfer already processed');
     processedNonces[otherChainNonce] = true;
-    token.transfer(central, amount);
+    token.transfer(to, amount);
     emit Transfer(
       msg.sender,
       to,
