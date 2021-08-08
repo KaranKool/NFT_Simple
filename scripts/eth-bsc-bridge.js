@@ -4,17 +4,17 @@ const BridgeBsc = require('../build/contracts/BridgeBsc.json');
 
 const web3Eth = new Web3('https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161');
 const web3Bsc = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');
-const adminPrivKey = '';
+const adminPrivKey = 'ebf548d99f274366c908abc7ce39dfbd74d0748e4b365f451a59e98594ec00e1';
 const { address: admin } = web3Bsc.eth.accounts.wallet.add(adminPrivKey);
 
 const bridgeEth = new web3Eth.eth.Contract(
   BridgeEth.abi,
-  BridgeEth.networks['4'].address
+  '0xc27D3cD4AEc695DC7701797155725Ad032bd0430'
 );
 
 const bridgeBsc = new web3Bsc.eth.Contract(
   BridgeBsc.abi,
-  BridgeBsc.networks['97'].address
+  '0xc27D3cD4AEc695DC7701797155725Ad032bd0430'
 );
 
 bridgeEth.events.Transfer(
